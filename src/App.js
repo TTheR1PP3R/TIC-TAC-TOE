@@ -23,8 +23,17 @@ class Game extends React.Component {
 
 
 class Board extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      squares: Array(9). fill(null),
+    }
+  }
   renderSquare(i) {
-    return <Square value={i}/>;
+    return <Square
+     value={this.state.squares[i]}
+     onCLick={this.handleClick(i)}
+     />;
   }
 
   render() {
@@ -55,15 +64,24 @@ class Board extends React.Component {
 
 
 class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
   render() {
     return (
-      <button className="square" onClick={() => console.log(this.props.value) }>
-        {this.props.value} 
+      <button
+        className="square"
+        onClick={() => this.props.onCLick({value: 'X'})}
+      >
+        {this.props.value}
       </button>
     );
   }
-} 
-
+}
 
 export default Game;
 
